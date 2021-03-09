@@ -1,0 +1,19 @@
+A repo for course CTIS-310: Advanced Computer Programming (Java)
+
+@authors Garrett H., Sonia A., {more}
+@instructor Chafic Bou-Saba
+@institution Guilford College
+
+
+/**************************************************GROUP_5**************************************************\
+Sorting algorithms - Each sorting algorithm should contain:
+1.) 10 fields to insert the number to be sorted either manually or using the generate random numbers button.
+2.) The number should be limited between 0 - 99.
+3.) 3 buttons:
+  a.) Generate random numbers.
+  b.) Start sort
+  c.) Reset numbers
+\***********************************************************************************************************/
+
+@due_date 3/12/21
+@message "don't forget to have fun!"
