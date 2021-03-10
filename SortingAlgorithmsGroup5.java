@@ -72,10 +72,24 @@ public class SortingAlgorithmsGroup5 extends Application {
                 + "\t2- Memory Space required to do so.\n";
         
         Label sortingIntroLabel = new Label(sortingIntroString);
-        HBox hBoxSortingIntro = new HBox(sortingIntroLabel);
-        hBoxSortingIntro.setAlignment(Pos.CENTER);
+        HBox sortingIntroHBox = new HBox(sortingIntroLabel);
+        sortingIntroHBox.setAlignment(Pos.CENTER);
         
-        tabSortingIntro.setContent(hBoxSortingIntro);
+        tabSortingIntro.setContent(sortingIntroHBox);
+        
+        // Set up the bubble sort tab
+        String bubbleSortString = "\tBubble Sort Description:\n"
+                + "\n"
+                + "Bubble Sort is the simplest sorting algorithm that works by "
+                + "repeatedly swapping the adjacent elements if they are in the"
+                + " wrong order.\n"
+                + "\n";
+        
+        Label bubbleSortLabel = new Label(bubbleSortString);
+        HBox bubbleSortHBox = new HBox(bubbleSortLabel);
+        bubbleSortHBox.setAlignment(Pos.TOP_CENTER);
+        
+        tabBubbleSort.setContent(bubbleSortHBox);
         
         // Add Tab objects to the TabPane object
         tabPane.getTabs().add(tabSortingIntro);
