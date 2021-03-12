@@ -19,7 +19,11 @@
 
 package sortingalgorithmsgroup5;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -29,18 +33,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
+import javafx.scene.layout.VBox;
 
 public class SortingAlgorithmsGroup5 extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws FileNotFoundException {
         // Initialize constants to hold window width and height
         final int SCENE_WIDTH = 800;
         final int SCENE_HEIGHT = 800;
+        
+        final double SPC_BTWN_CHLDRN = 15.00;
         
         // Initialize TabPane object
         TabPane tabPane = new TabPane();    // TabPane is a container control which
@@ -62,6 +72,34 @@ public class SortingAlgorithmsGroup5 extends Application {
         tabMergeSort.setClosable(false);
         tabQuickSort.setClosable(false);
         
+        // Make the text fields
+        ArrayList<TextField> textFields = new ArrayList<TextField>();
+        HBox textFieldsHBox = new HBox();
+        
+        for(int i = 0; i < 11; i++){
+            TextField textField = new TextField();
+            textFields.add(textField);
+            textFieldsHBox.getChildren().add(textField);
+        }
+        
+        // Make the buttons
+        Button genRanNumsBtn = new Button("Generate Random Numbers");
+        Button strtBubSrtBtn = new Button("Start Bubble Sort");
+        Button strtSelSrtBtn = new Button("Start Selection Sort");
+        Button strtInsSrtBtn = new Button("Start Insertion Sort");
+        Button strtMerSrtBtn = new Button("Start Merge Sort");
+        Button strtQuiSrtBtn = new Button("Start Quick Sort");
+        Button rstNumsBtn = new Button("Reset Numbers");
+        
+        // Creating and adding images to the buttons
+        FileInputStream quesMarkImgFile = new FileInputStream("qMark.jpg");
+        Image quesMarkImage = new Image(quesMarkImgFile);
+        ImageView quesMarkImageView = new ImageView(quesMarkImage);
+        quesMarkImageView.setFitHeight(25);
+        quesMarkImageView.setFitWidth(25);
+        
+        genRanNumsBtn.setGraphic(quesMarkImageView);
+        
         // Setting up the first (default) tab
         String sortingIntroString = "Sorting Effeciency\n"
                 + "\n"
@@ -76,21 +114,28 @@ public class SortingAlgorithmsGroup5 extends Application {
         sortingIntroHBox.setAlignment(Pos.CENTER);
         
         tabSortingIntro.setContent(sortingIntroHBox);
-        
+
         // Set up the bubble sort tab
-        String bubbleSortString = "\tBubble Sort Description:\n"
+        VBox bubSrtVBox = new VBox();
+        bubSrtVBox.setAlignment(Pos.TOP_CENTER);
+        bubSrtVBox.setSpacing(SPC_BTWN_CHLDRN);
+        
+        String bubSrtString = "\tBubble Sort Description:\n"
                 + "\n"
                 + "Bubble Sort is the simplest sorting algorithm that works by "
                 + "repeatedly swapping the adjacent elements if they are in the"
                 + " wrong order.\n"
                 + "\n";
         
-        Label bubbleSortLabel = new Label(bubbleSortString);
-        HBox bubbleSortHBox = new HBox(bubbleSortLabel);
-        bubbleSortHBox.setAlignment(Pos.TOP_CENTER);
+        Label bubSrtLabel = new Label(bubSrtString);
         
-        tabBubbleSort.setContent(bubbleSortHBox);
+        HBox bubSrtBtnsHBox = new HBox(genRanNumsBtn, strtBubSrtBtn, rstNumsBtn);
+        bubSrtBtnsHBox.setAlignment(Pos.CENTER);
         
+        bubSrtVBox.getChildren().addAll(bubSrtLabel, textFieldsHBox,
+                bubSrtBtnsHBox);
+        tabBubbleSort.setContent(bubSrtVBox);
+
         // Add Tab objects to the TabPane object
         tabPane.getTabs().add(tabSortingIntro);
         tabPane.getTabs().add(tabBubbleSort);
