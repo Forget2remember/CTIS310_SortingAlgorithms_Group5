@@ -47,6 +47,8 @@ public class SortingAlgorithmsGroup5 extends Application {
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
         // CONSTANT INITIALIZATIONS
+        final int NUM_ALGOS = 5;
+        final int NUM_TXT_FIELDS = 11;
         final int SCENE_WIDTH = 800;
         final int SCENE_HEIGHT = 800;
         final double SPC_BTWN_CHLDRN = 15.00;
@@ -59,6 +61,8 @@ public class SortingAlgorithmsGroup5 extends Application {
         Tab tabInsertionSort = new Tab("Insertion Sort");
         Tab tabMergeSort = new Tab("Merge Sort");
         Tab tabQuickSort = new Tab("Quick Sort");
+        Label defaultTabLabel = new Label();
+        HBox defaultTabHBox = new HBox();
         ArrayList<VBox> masterVBoxes = new ArrayList<VBox>();
         ArrayList<String> descriptionStrings = new ArrayList<String>();
         ArrayList<Label> descriptionLabels = new ArrayList<Label>();
@@ -66,11 +70,14 @@ public class SortingAlgorithmsGroup5 extends Application {
         ArrayList<Image> genNumBtnImages = new ArrayList<Image>();
         ArrayList<ImageView> genNumBtnImageViews = new ArrayList<ImageView>();
         ArrayList<FileInputStream> genNumBtnFiles = new ArrayList<FileInputStream>();
+        ArrayList<FileInputStream> startButtonImgFiles = new ArrayList<FileInputStream>();
+        ArrayList<Image> startButtonImages = new ArrayList<Image>();
+        ArrayList<ImageView> startButtonImageViews = new ArrayList<ImageView>();
         ArrayList<Button> genNumButtons = new ArrayList<Button>();
         ArrayList<Button> resetButtons = new ArrayList<Button>();
         ArrayList<Button> startButtons = new ArrayList<Button>();
         ArrayList<HBox> buttonHBoxes = new ArrayList<HBox>();
-        String bStr, sStr, iStr, mStr, qStr;
+        String defaultTabStr, bStr, sStr, iStr, mStr, qStr;
         
         // Setting custom options for the tabs.
         tabSortingIntro.setClosable(false);
@@ -81,11 +88,33 @@ public class SortingAlgorithmsGroup5 extends Application {
         tabQuickSort.setClosable(false);
         
         
+        // Creating the first (default) tab.
+        // 
+        // The default tab is the first tab that the user sees when starting the
+        // app. It does not contain the same graphical components as the other
+        // (sorting algorithm) tabs.
+        //
+        // It is featured in the source first, as it is distinct from the other 
+        // tabs.
+        
+        defaultTabStr = "Sorting Effeciency\n"
+                + "\n"
+                + "Two two main criterias to judge which algorithm is better than"
+                + " the over have been:\n"
+                + "\n"
+                + "\t1- Time taken to sort the given data.\n"
+                + "\t2- Memory Space required to do so.\n";
+        
+        defaultTabLabel.setText(defaultTabStr);
+        defaultTabHBox.getChildren().add(defaultTabLabel);
+        defaultTabHBox.setAlignment(Pos.CENTER);
+        
+        
         // Initializing 5 master VBox objects total.
         // Each sorting algorithm tab will contain its own master VBox, which
         // will contain the rest of that tab's graphical components.
         
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < NUM_ALGOS; i++){
             VBox vBox = new VBox();
             vBox.setAlignment(Pos.TOP_CENTER);
             vBox.setSpacing(SPC_BTWN_CHLDRN);
@@ -97,7 +126,7 @@ public class SortingAlgorithmsGroup5 extends Application {
         // respective description. There will be one String object per Label
         // object, and one Label object per sorting algorithm tab.
         //
-        // Allocates content to the "descriptionStrings" and "descriptionLabels"
+        // Defines the "descriptionStrings" and "descriptionLabels"
         // ArrayList objects.
         
         bStr = "\tBubble Sort Description:\n"
@@ -139,7 +168,7 @@ public class SortingAlgorithmsGroup5 extends Application {
         descriptionStrings.add(mStr);
         descriptionStrings.add(qStr);
         
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < NUM_ALGOS; i++){
             descriptionLabels.add(new Label(descriptionStrings.get(i)));
         }
         
@@ -148,11 +177,11 @@ public class SortingAlgorithmsGroup5 extends Application {
         // Each sorting algorithm tab will contain 1 HBox consisting of
         // 11 text fields for outputting the randomly-generated numbers.
         //
-        // Allocates content to the "textFieldBoxes" ArrayList object.
+        // Defines the "textFieldBoxes" ArrayList object.
         
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < NUM_ALGOS; i++){
             HBox hBox = new HBox();
-            for(int j = 0; j < 11; j++){
+            for(int j = 0; j < NUM_TXT_FIELDS; j++){
                 hBox.getChildren().add(new TextField());
             }
             textFieldHBoxes.add(hBox);
@@ -164,38 +193,45 @@ public class SortingAlgorithmsGroup5 extends Application {
         // image. (So far only have the "genNumBtnImageViews" ArrayList
         // defined with images.)
         //
-        // Allocates content to the "genNumBtnFiles", "genNumBtnImages", and
+        // Defines the "genNumBtnFiles", "genNumBtnImages", and
         // "genNumBtnImageViews" ArrayList objects.
         
-        for(int i = 0; i < 5; i++){
-            FileInputStream file = new FileInputStream("qMark.jpg");
-            genNumBtnFiles.add(file);
+        for(int i = 0; i < NUM_ALGOS; i++){
+            FileInputStream generateNumImgFile = 
+                    new FileInputStream("qMark.jpg");
+            FileInputStream startButtonImgFile = 
+                    new FileInputStream("checkmark.png");
+            genNumBtnFiles.add(generateNumImgFile);
+            startButtonImgFiles.add(startButtonImgFile);
             
-            Image image = new Image(genNumBtnFiles.get(i));
-            genNumBtnImages.add(image);
+            Image genNumButtonImage = 
+                    new Image(genNumBtnFiles.get(i));
+            Image startButtonImage = 
+                    new Image(startButtonImgFiles.get(i));
+            genNumBtnImages.add(genNumButtonImage);
+            startButtonImages.add(startButtonImage);
             
-            ImageView imageView = new ImageView(genNumBtnImages.get(i));
-            imageView.setFitHeight(25);
-            imageView.setFitWidth(25);
-            genNumBtnImageViews.add(imageView);
+            ImageView genNumButtonImageView = 
+                    new ImageView(genNumBtnImages.get(i));
+            ImageView startButtonImageView =
+                    new ImageView(startButtonImages.get(i));
+            
+            genNumButtonImageView.setFitHeight(25);
+            genNumButtonImageView.setFitWidth(25);
+            startButtonImageView.setFitHeight(25);
+            startButtonImageView.setFitWidth(25);
+            
+            genNumBtnImageViews.add(genNumButtonImageView);
+            startButtonImageViews.add(startButtonImageView);
         }
         
         
+        // Each tab's "Start ___ Sort" Button object is added individually.
+        // 
         // Instantiates 2 Button objects per sorting algorithm tab.
+        // Defines the "genNumButtons" and "resetButtons" ArrayList objects.
         //
-        // Allocates content to the "genNumButtons" and "resetButtons"
-        // ArrayList objects.
-        //
-        // Then each tab's "Start ___ Sort" Button object is added individually.
-        
-        for(int i = 0; i < 5; i++){
-            Button button = new Button("Generate Random Numbers");
-            button.setGraphic(genNumBtnImageViews.get(i));
-            genNumButtons.add(button);
-            
-            Button button1 = new Button("Reset Numbers");
-            resetButtons.add(button1);
-        }
+        // Sets the graphics of the "start sort" button of each algorithm tab.
         
         startButtons.add(new Button("Start Bubble Sort"));
         startButtons.add(new Button("Start Selection Sort"));
@@ -203,14 +239,25 @@ public class SortingAlgorithmsGroup5 extends Application {
         startButtons.add(new Button("Start Merge Sort"));
         startButtons.add(new Button("Start Quick Sort"));
         
+        for(int i = 0; i < NUM_ALGOS; i++){
+            Button button = new Button("Generate Random Numbers");
+            button.setGraphic(genNumBtnImageViews.get(i));
+            genNumButtons.add(button);
+            
+            Button button1 = new Button("Reset Numbers");
+            resetButtons.add(button1);
+            
+            startButtons.get(i).setGraphic(startButtonImageViews.get(i));
+        }
+        
         
         // Instantiates 5 HBox objects, one per sorting algorithm tab.
         // Each HBox holds 3 Button objects.
         // Custom settings are set for each HBox.
         //
-        // Allocates content to the "buttonHBoxes" ArrayList object.
+        // Defines the "buttonHBoxes" ArrayList object.
         
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < NUM_ALGOS; i++){
             HBox hBox = new HBox();
             hBox.getChildren().addAll(genNumButtons.get(i), startButtons.get(i),
                     resetButtons.get(i));
@@ -224,31 +271,17 @@ public class SortingAlgorithmsGroup5 extends Application {
         //
         // There are 5 master VBoxes total.
         //
-        // Allocates content to the "masterVBoxes" ArrayList object.
+        // Defines the "masterVBoxes" ArrayList object.
         
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < NUM_ALGOS; i++){
             masterVBoxes.get(i).getChildren().addAll(descriptionLabels.get(i),
                     textFieldHBoxes.get(i),
                     buttonHBoxes.get(i));
         }
         
         
-        // Setting up the first (default) tab
-        String sortingIntroString = "Sorting Effeciency\n"
-                + "\n"
-                + "Two two main criterias to judge which algorithm is better than"
-                + " the over have been:\n"
-                + "\n"
-                + "\t1- Time taken to sort the given data.\n"
-                + "\t2- Memory Space required to do so.\n";
-        
-        Label sortingIntroLabel = new Label(sortingIntroString);
-        HBox sortingIntroHBox = new HBox(sortingIntroLabel);
-        sortingIntroHBox.setAlignment(Pos.CENTER);
-        
-        
         // Set the master VBoxes and HBox as the content of each tab.
-        tabSortingIntro.setContent(sortingIntroHBox);
+        tabSortingIntro.setContent(defaultTabHBox);
         tabBubbleSort.setContent(masterVBoxes.get(0));
         tabSelectionSort.setContent(masterVBoxes.get(1));
         tabInsertionSort.setContent(masterVBoxes.get(2));
