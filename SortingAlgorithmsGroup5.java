@@ -1,5 +1,5 @@
 /******************************************************************************\
- *  @authors Garrett Hedgecock, Sonia Akkiangadi, {more}                      *
+ *  @authors Garrett Hedgecock {more}                                         *
  *  @instructor Chafic Bou-Saba                                               *
  *  @institution Guilford College                                             *
  *  @course CTIS-310                                                          *
@@ -41,6 +41,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javax.swing.event.ChangeListener;
 
 public class SortingAlgorithmsGroup5 extends Application {
 
@@ -232,6 +235,11 @@ public class SortingAlgorithmsGroup5 extends Application {
         // Defines the "genNumButtons" and "resetButtons" ArrayList objects.
         //
         // Sets the graphics of the "start sort" button of each algorithm tab.
+        //
+        // Also experimenting with audio files to play when a button is pressed.
+        
+        //Media buttonMedia = new Media();
+        //MediaPlayer mediaPlayer = new MediaPlayer(buttonMedia);
         
         startButtons.add(new Button("Start Bubble Sort"));
         startButtons.add(new Button("Start Selection Sort"));
@@ -242,6 +250,9 @@ public class SortingAlgorithmsGroup5 extends Application {
         for(int i = 0; i < NUM_ALGOS; i++){
             Button button = new Button("Generate Random Numbers");
             button.setGraphic(genNumBtnImageViews.get(i));
+            button.setOnAction(a -> {
+                
+            });
             genNumButtons.add(button);
             
             Button button1 = new Button("Reset Numbers");
@@ -249,6 +260,12 @@ public class SortingAlgorithmsGroup5 extends Application {
             
             startButtons.get(i).setGraphic(startButtonImageViews.get(i));
         }
+        
+        
+        // Define ChangeListener objects for observe changes made to the
+        // buttons. (e.g. button pressed)
+        //
+        // NOT YET IMPLEMENTED.
         
         
         // Instantiates 5 HBox objects, one per sorting algorithm tab.
