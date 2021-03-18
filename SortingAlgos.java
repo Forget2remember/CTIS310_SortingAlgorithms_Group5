@@ -31,7 +31,7 @@ public class SortingAlgos {
         this.sorted = true;
     }
     
-    public int[] BubbleSort(){
+    public int[] bubbleSort(){
         this.sorted = true;
         int[] array = this.numbers.clone();
         int temp;
@@ -52,7 +52,7 @@ public class SortingAlgos {
         return array;
     }
     
-    public int[] SelectionSort(){
+    public int[] selectionSort(){
         this.sorted = true;
         int[] numbersArray = this.numbers.clone();
         int temp, index, smallerNumber;
@@ -70,5 +70,9 @@ public class SortingAlgos {
             numbersArray[i] = smallerNumber;
         }
         return numbersArray;
+    }
+    
+    public int[] insertionSort(){
+        
     }
 }
