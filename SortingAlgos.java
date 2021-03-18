@@ -73,6 +73,18 @@ public class SortingAlgos {
     }
     
     public int[] insertionSort(){
+        int[] numbersArray = this.numbers.clone();
+        int temp;
         
+        for(int i = 1; i < (this.length); i++){
+            for(int j = 1; j > 0; j--){
+                if(numbersArray[j] < numbersArray[j - 1]){
+                    temp = numbersArray[j];
+                    numbersArray[j] = numbersArray[j - 1];
+                    numbersArray[j - 1] = temp;
+                }
+            }
+        }
+        return numbersArray;
     }
 }
