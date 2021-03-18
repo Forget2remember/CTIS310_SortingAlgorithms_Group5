@@ -51,4 +51,24 @@ public class SortingAlgos {
         }
         return array;
     }
+    
+    public int[] SelectionSort(){
+        this.sorted = true;
+        int[] numbersArray = this.numbers.clone();
+        int temp, index, smallerNumber;
+        
+        for(int i = 0; i < (this.length - 1); i++){
+            index = i;
+            
+            for(int j = (i + 1); i < this.length; j++){
+                if(numbersArray[j] < numbersArray[index]){
+                    index = j;
+                }
+            }
+            smallerNumber = numbersArray[index];
+            numbersArray[index] = numbersArray[i];
+            numbersArray[i] = smallerNumber;
+        }
+        return numbersArray;
+    }
 }
